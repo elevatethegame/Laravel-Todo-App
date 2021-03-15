@@ -14,9 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post('/home', [App\Http\Controllers\HomeController::class, 'store']);
+Route::get('/home/list/{list_id}', [App\Http\Controllers\HomeController::class, 'show']);
+Route::delete('/home/list/{list_id}', [App\Http\Controllers\HomeController::class, 'index']);

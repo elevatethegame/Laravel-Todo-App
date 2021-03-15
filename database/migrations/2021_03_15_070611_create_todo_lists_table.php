@@ -17,7 +17,7 @@ class CreateTodoListsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name');
-            $table->mediumText('description');
+            $table->foreignId('user_id')->constrained('users');
         });
     }
 
