@@ -21,5 +21,8 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/home', [App\Http\Controllers\HomeController::class, 'store']);
-Route::get('/home/list/{list_id}', [App\Http\Controllers\HomeController::class, 'show']);
-Route::delete('/home/list/{list_id}', [App\Http\Controllers\HomeController::class, 'index']);
+Route::delete('/home/list/{list_id}', [App\Http\Controllers\HomeController::class, 'destroy']);
+
+Route::get('/list/{list_id}/items', [App\Http\Controllers\ItemsController::class, 'index']);
+Route::post('/list/{list_id}/items', [App\Http\Controllers\ItemsController::class, 'store']);
+Route::put('/list/{list_id}/items/{item_id}', [App\Http\Controllers\ItemsController::class, 'markCompleted']);

@@ -26,7 +26,8 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return view('home')->with('lists', $user->todo_lists);
+        $lists = TodoList::where('user_id', Auth::id())->orderBy('created_at', 'desc')->paginate(10);
+        return view('home')->with('lists', $lists);
     }
 
     /**
@@ -47,19 +48,7 @@ class HomeController extends Controller
         $list->user_id = Auth::id();
         $list->save();
 
-        return redirect('/home')->with('success', 'List Created');
-    }
-
-    /**
-     * Display the specified list.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $list = TodoList::find($id);
-        return view('lists.show')->with('list', $list);
+        return redirect('/home')->with('success', 'Todo List Created');
     }
 
     /**
@@ -78,7 +67,7 @@ class HomeController extends Controller
         }
 
         $list->delete();
-        return redirect('/home')->with('success', 'List Removed');
+        return redirect('/home')->with('success', 'Todo List "'.$list->name.'"'.' Removed');
     }
 
 }

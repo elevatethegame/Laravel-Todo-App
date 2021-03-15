@@ -18,7 +18,7 @@ class CreateListItemsTable extends Migration
             $table->timestamps();
             $table->mediumText('description');
             $table->boolean('is_completed')->default(false);
-            $table->foreignId('todo_list_id')->constrained('todo_lists');
+            $table->foreignId('todo_list_id')->constrained('todo_lists')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
