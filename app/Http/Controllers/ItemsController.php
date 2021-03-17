@@ -28,7 +28,7 @@ class ItemsController extends Controller
     {
         $list = TodoList::find($list_id);
 
-        // Only allow user to view lists that belongs to him
+        // Only allow user to view lists that belong to him
         if(Auth::id() !== $list->user_id) {
             return redirect("/home")->with('error', 'Unauthorized Page');
         }
